@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrare Lot - FC Programare Web</title>
+    <link rel="stylesheet" href="stil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Management Club Fotbal - Administrare Lot</h1>
+    </header>
+
+    <nav>
+        <ul class="menu-principal">
+            <li><a href="index.html">Acasă</a></li>
+            
+            <li class="are-submeniu">
+                <a href="#">Echipă <i class="fas fa-caret-up"></i></a>
+                <ul class="submenu">
+                    <li><a href="index.html">Lot Seniori</a></li>
+                    <li><a href="index.html">Grupe Juniori</a></li>
+                </ul>
+            </li>
+
+            <li><a href="autentificare.html">Autentificare</a></li>
+            <li><a href="administrare.html">Administrare Lot</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Editare Date Sportiv</h2>
+            
+            <p><small>Câmpurile marcate cu <span style="color: red; font-weight: bold;">*</span> sunt obligatorii.</small></p>
+
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Identitate</legend>
+                    <p>
+                        <label>Nume <span style="color: red; font-weight: bold;">*</span>:</label> 
+                        <input type="text" name="n" required>
+                    </p>
+                    <p>
+                        <label>Prenume <span style="color: red; font-weight: bold;">*</span>:</label> 
+                        <input type="text" name="p" required>
+                    </p>
+                    <p>
+                        <label>ID Sistem:</label> 
+                        <input type="text" value="SYS-2026" readonly>
+                    </p> 
+                </fieldset>
+
+                <fieldset>
+                    <legend>Parametri Tehnici</legend>
+                    <p>
+                        <label>Vârstă (16-45):</label> 
+                        <input type="number" name="v" min="16" max="45" step="1" value="20">
+                        <span class="eroare-validare">⚠ Vârsta admisă este intre 16 și 45 de ani!</span>
+                    </p>
+                    <p>
+                        <label>Nivel Energie (0-100):</label> 
+                        <input type="range" name="e" min="0" max="100">
+                    </p>
+                    <p>
+                        <label>Data Contract:</label> 
+                        <input type="date" name="d">
+                    </p>
+                    <p>
+                        <label>Club anterior:</label> 
+                        <input list="cluburi" name="c">
+                        <datalist id="cluburi">
+                            <option value="CFR Cluj">
+                            <option value="FCSB">
+                            <option value="Farul">
+                        </datalist>
+                    </p>
+                    <p>
+                        <label>Observații antrenor:</label><br>
+                        <textarea name="obs" rows="3" cols="40"></textarea>
+                    </p>
+                </fieldset>
+                
+                <p>
+                    <input type="submit" value="Salvează Date">
+                    <input type="reset" value="Resetează">
+                    <button type="button">Verifică Date</button>
+                </p>
+            </form>
+        </section>
+
+        <aside>
+            <div class="widget-card">
+                <h2>Ajutor Rapid</h2>
+                <details>
+                    <summary>Instrucțiuni completare</summary>
+                    <p>Vă rugăm să completați cu atenție toate câmpurile obligatorii pentru a putea salva modificările în baza de date. ID-ul este generat automat.</p>
+                </details>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-sectiune">
+                <h3>FC Programare Web</h3>
+                <p>Suntem un club dedicat performanței și inovației, combinând pasiunea pentru fotbal cu tehnologia modernă.</p>
+            </div>
+            
+            <div class="footer-sectiune">
+                <h3>Contact</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Cluj-Napoca, România</p>
+                <p><i class="fas fa-envelope"></i> contact@fcprogramare.ro</p>
+                <p><i class="fas fa-phone"></i> +40 712 345 678</p>
+            </div>
+            
+            <div class="footer-sectiune">
+                <h3>Urmărește-ne</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 David Dumitreasa. Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+</body>
+</html>

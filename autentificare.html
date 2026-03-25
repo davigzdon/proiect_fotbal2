@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>FC Programare Web - Acces Cont</title>
+    <link rel="stylesheet" href="stil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Portal Membri</h1>
+    </header>
+
+    <nav>
+    <ul class="menu-principal">
+        <li><a href="index.html">Acasă</a></li>
+        
+        <li class="are-submeniu">
+            <a href="#">Echipă <i class="fas fa-caret-up"></i></a>
+            <ul class="submenu">
+                <li><a href="index.html">Lot Seniori</a></li>
+                <li><a href="index.html">Grupe Juniori</a></li>
+            </ul>
+        </li>
+
+        <li><a href="autentificare.html">Autentificare</a></li>
+        <li><a href="administrare.html">Administrare Lot</a></li>
+    </ul>
+</nav>
+
+    <main>
+        <section>
+            <h2>Autentificare Utilizator</h2> 
+            <article>
+                <h3>Intră în cont</h3>
+                <form action="#" method="post">
+                    <p>
+                        <label for="user">Nume utilizator:</label>
+                        <input type="text" id="user" name="user" required placeholder="Ex: david10">
+                    </p>
+                    <p>
+                        <label for="pass">Parolă:</label>
+                        <input type="password" id="pass" name="pass" required>
+                    </p>
+                    <button type="submit">Autentificare</button>
+                </form>
+            </article>
+        </section>
+
+        <hr>
+
+        <section>
+            <h2>Creare Cont Nou</h2>
+            <article>
+                <h3>Înregistrare Suporter</h3>
+                <p>Alătură-te comunității noastre pentru noutăți despre <strong>Lotul de Seniori</strong>.</p>
+                
+                <form action="#" method="post">
+                    <fieldset>
+                        <legend>Date înregistrare</legend>
+                        <p>
+                            <label>Adresă de e-mail:</label>
+                            <input type="email" name="email" required placeholder="nume@exemplu.ro">
+                        </p>
+                        <p>
+                            <label>Alege rolul tău:</label><br>
+                            <input type="radio" name="rol" value="s" checked> Suporter simplu<br>
+                            <input type="radio" name="rol" value="j"> Staff club<br>
+                            <input type="radio" name="rol" value="a"> Administrator 
+                        </p>
+                        <p>
+                            <input type="checkbox" name="termeni" required> 
+                            Sunt de acord cu prelucrarea datelor conform regulamentului.
+                        </p>
+                        <p>
+                            <input type="submit" value="Înregistrează-te">
+                        </p>
+                    </fieldset>
+                </form>
+            </article>
+        </section>
+
+        <aside>
+            <section>
+                <h3>Informații Suplimentare</h3>
+                <details>
+                    <summary>De ce să îți faci cont?</summary>
+                    <p>Membrii înregistrați au acces la statistici detaliate și primesc notificări despre antrenamentele echipei</p>
+                </details>
+            </section>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-sectiune">
+                <h3>FC Programare Web</h3>
+                <p>Suntem un club dedicat performanței și inovației, combinând pasiunea pentru fotbal cu tehnologia modernă.</p>
+            </div>
+            
+            <div class="footer-sectiune">
+                <h3>Contact</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Cluj-Napoca, România</p>
+                <p><i class="fas fa-envelope"></i> contact@fcprogramare.ro</p>
+                <p><i class="fas fa-phone"></i> +40 712 345 678</p>
+            </div>
+            
+            <div class="footer-sectiune">
+                <h3>Urmărește-ne</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Copyright &copy; 2026 David Dumitreasa. Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+</body>
+</html>
