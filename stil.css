@@ -1,78 +1,74 @@
 /* ==========================================================
-   1. VARIABILE CSS 
-   Cerință: Definirea variabilelor pentru culori/dimensiuni
+   1. VARIABILE CSS (Cerință: CSS Custom Properties)
    ========================================================== */
 :root {
-    --culoare-primara: #2E7D32;
-    --culoare-secundara: #4CAF50;
-    --culoare-accent: #FFC107;
+    --culoare-primara: #2E7D32; /* Verde inchis */
+    --culoare-secundara: #4CAF50; /* Verde deschis */
+    --culoare-accent: #FFC107; /* Galben / Auriu */
     --text-deschis: #FFFFFF;
     --text-inchis: #333333;
     --fundal-gri: #f4f4f4;
-    --timp-animatie-meniu: 2s; /* Animație de câteva secunde pentru hover meniu */
+    --timp-animatie-meniu: 2s; /* Cerinta: animatie de cateva secunde */
     --font-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* ==========================================================
-   2. RESETARE ȘI LAYOUT PRINCIPAL 
-   Cerință: Așezare folosind Flexbox; Footer împins în jos
+   2. RESETARE ȘI LAYOUT PRINCIPAL (Flexbox)
    ========================================================== */
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    min-height: 100vh;
     font-family: var(--font-principal);
     color: var(--text-inchis);
     background-color: var(--fundal-gri);
     display: flex;
-    flex-direction: column; /* Flexbox pentru a împinge footerul jos */
+    flex-direction: column; /* Flexbox pentru a impinge footerul in jos */
 }
 
 main {
-    flex: 1; /* Ocupă tot spațiul rămas, împingând automat footer-ul jos */
+    flex: 1; /* Ocupa tot spatiul ramas liber */
     padding: 20px;
-    padding-bottom: 80px; /* Lasă spațiu jos ca să nu acopere meniul fixat */
+    padding-bottom: 80px; /* Spatiu jos pentru a nu fi acoperit de meniul fix */
 }
 
 /* ==========================================================
    3. HEADER ȘI LOGO ANIMAT
-   Cerință: Gradient liniar/radial; Animație CSS3 la hover pe logo
    ========================================================== */
 header {
-    background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara)); /* Gradient liniar */
+    background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara)); /* Cerinta: Gradient */
     color: var(--text-deschis);
     padding: 30px 20px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.logo {
+.logo, header h1 {
     display: inline-block;
-    font-size: 2.5em;
-    font-weight: bold;
-    transition: transform 0.5s ease; /* Pregătire animație CSS3 */
+    transition: transform 0.5s ease; /* Pregatire animatie CSS3 */
+    margin: 0;
     cursor: pointer;
 }
 
-.logo:hover {
-    transform: scale(1.2) rotate(5deg); /* Mărire și rotire a logo-ului la hover */
+/* Animatie logo la hover */
+header h1:hover {
+    transform: scale(1.1) rotate(2deg);
 }
 
 /* ==========================================================
-   4. MENIU - VARIANTA 1
-   Cerință: Orizontal în partea de jos; Submeniu deschis de jos în sus
+   4. MENIU - VARIANTA 1 (Orizontal, Jos, Submeniu in Sus)
    ========================================================== */
 nav {
-    position: fixed; /* Meniu fixat */
-    bottom: 0; /* În partea de jos a ferestrei */
+    position: fixed;
+    bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #222;
+    background-color: #111;
     z-index: 1000;
 }
 
 .menu-principal {
-    display: flex; /* Așezare orizontală */
+    display: flex;
     justify-content: center;
     list-style: none;
     margin: 0;
@@ -80,7 +76,7 @@ nav {
 }
 
 .menu-principal > li {
-    position: relative; /* Esențial pentru poziționarea submeniului */
+    position: relative; /* Esential pentru submeniu */
 }
 
 .menu-principal > li > a {
@@ -90,25 +86,24 @@ nav {
     text-decoration: none;
     font-weight: bold;
     border-top: 4px solid transparent;
-    /* Animație de câteva secunde pe bordură/background */
     transition: background-color var(--timp-animatie-meniu) ease, border-top var(--timp-animatie-meniu) ease;
 }
 
 .menu-principal > li > a:hover {
-    background-color: var(--culoare-primara); /* Background care apare animat */
-    border-top: 4px solid var(--culoare-accent); /* Bordură care apare animat */
+    background-color: var(--culoare-primara);
+    border-top: 4px solid var(--culoare-accent);
 }
 
-/* SUBMENIU: Ascuns inițial și poziționat să urce */
+/* SUBMENIU: Ascuns initial si repozitionat deasupra meniului */
 .submenu {
     position: absolute;
-    bottom: 100%; /* Deschidere de jos în sus (apare deasupra meniului principal) */
+    bottom: 100%; /* Urca submeniul deasupra bazei */
     left: 0;
-    background-color: #333;
+    background-color: #222;
     list-style: none;
     padding: 0;
     margin: 0;
-    display: none; /* Ascuns implicit */
+    display: none; 
     min-width: 180px;
     box-shadow: 0 -4px 6px rgba(0,0,0,0.3);
 }
@@ -126,40 +121,59 @@ nav {
     background-color: var(--culoare-secundara);
 }
 
-/* Afișare submeniu la hover pe elementul părinte */
+/* Afisare submeniu la hover */
 .are-submeniu:hover .submenu {
     display: block; 
 }
 
 /* ==========================================================
-   5. TABEL STILIZAT
-   Cerință: CSS (inclusiv responsive); La hover afișează un div suplimentar
+   5. TABEL STILIZAT (Dinamic, Hover pe Celula, Tooltip)
    ========================================================== */
 table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
     background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden; 
 }
 
 th, td {
     padding: 15px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
-    position: relative; /* Pentru a poziționa div-ul suplimentar absolut */
+    border-bottom: 1px solid #eee;
+    transition: all 0.3s ease; 
+    position: relative;
 }
 
 th {
     background-color: var(--culoare-primara);
     color: white;
+    font-size: 1.1em;
+    text-transform: uppercase;
 }
 
-tr:hover {
-    background-color: #f1f1f1;
+/* Tabel Imbricat (Statistici) */
+table table {
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+}
+table table td {
+    border: 1px solid #eee;
 }
 
-/* Div-ul cu info suplimentare (ascuns) */
+/* Hover separat DOAR pe celula, pentru a rezolva overlap-ul cu rowspan */
+td:hover {
+    background-color: #f1f8e9;
+    transform: scale(1.03); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    z-index: 2; 
+}
+
+/* Tooltip (Div Informatii Suplimentare ascuns initial) */
 .info-extra {
     display: none;
     position: absolute;
@@ -174,7 +188,6 @@ tr:hover {
     z-index: 10;
 }
 
-/* Săgeata pentru tooltip (utilizare pseudo-element ::after cerută de pdf) */
 .info-extra::after {
     content: "";
     position: absolute;
@@ -187,22 +200,22 @@ tr:hover {
 }
 
 td:hover .info-extra {
-    display: block; /* Afișare informații suplimentare la hover */
+    display: block; 
 }
 
 /* ==========================================================
-   6. SLIDER IMAGINI FĂRĂ JS (Corectat pentru cerințe)
+   6. SLIDER IMAGINI FĂRĂ JS
    ========================================================== */
 .css-slider {
     display: flex;
-    flex-wrap: wrap; /* Permite trecerea pe rândul următor */
+    flex-wrap: wrap; 
     justify-content: center;
     gap: 15px;
     max-width: 800px;
     margin: 30px auto;
 }
 
-/* Imaginea mare - Folosim order: -1 pentru a o afișa DEASUPRA thumbnail-urilor */
+/* Imaginea Mare (Fortata in sus prin order: -1) */
 .large-view {
     order: -1; 
     width: 100%;
@@ -218,22 +231,16 @@ td:hover .info-extra {
 
 .large-img {
     position: absolute;
-    top: 0; 
-    left: 0;
-    width: 100%; 
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     object-fit: cover;
-    opacity: 0; /* Toate imaginile mari sunt ascunse implicit */
+    opacity: 0; 
     transition: opacity 0.4s ease-in-out;
 }
 
-/* Prima imagine este vizibilă implicit */
-.large-img.l1 { 
-    opacity: 1; 
-    z-index: 1; 
-}
+.large-img.l1 { opacity: 1; z-index: 1; } /* Afiseaza prima poza */
 
-/* Stil pentru pozele mici (Thumbnail-uri) */
+/* Thumbnail-uri */
 .thumb {
     width: 120px;
     height: 80px;
@@ -245,27 +252,17 @@ td:hover .info-extra {
 }
 
 .thumb:hover {
-    transform: translateY(-5px); /* Se ridică puțin la hover */
+    transform: translateY(-5px);
     border-color: var(--culoare-accent);
 }
 
-/* MAGIA CSS (FĂRĂ JS):
-   Când facem hover pe thumbnail-ul X, selectăm fratele (~) care este .large-view 
-   și facem vizibilă imaginea interioară corespunzătoare.
-*/
+/* Magia de CSS (Selector general de frati) */
 .t1:hover ~ .large-view .l1 { opacity: 1; z-index: 2; }
 .t2:hover ~ .large-view .l2 { opacity: 1; z-index: 2; }
 .t3:hover ~ .large-view .l3 { opacity: 1; z-index: 2; }
 
-/* Asigurăm afișarea corectă pe mobil (Prag: Telefoane) */
-@media (max-width: 480px) {
-    .large-view { height: 250px; }
-    .thumb { width: 80px; height: 60px; }
-}
-
 /* ==========================================================
-   7. FORMULAR STILIZAT ȘI WIDGETURI
-   Cerință: Stilizare controale input, focus states; Widget-uri
+   7. FORMULAR STILIZAT, VALIDARE SI WIDGETURI
    ========================================================== */
 form {
     background-color: white;
@@ -276,24 +273,37 @@ form {
     margin: 20px auto;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="number"], select, textarea {
+fieldset {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+legend {
+    font-weight: bold;
+    color: var(--culoare-primara);
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"], select, textarea {
     width: 100%;
     padding: 12px;
     margin: 8px 0 20px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box; 
-    transition: border-color 0.3s, box-shadow 0.3s; /* */
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Stări de focus */
+/* Stari de focus */
 input:focus, select:focus, textarea:focus {
     border-color: var(--culoare-primara);
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.4); /* Glow effect la click */
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
     outline: none;
 }
 
-button, input[type="submit"], input[type="reset"] {
+/* Butoane */
+button, input[type="submit"], input[type="reset"], input[type="button"] {
     background-color: var(--culoare-primara);
     color: white;
     padding: 12px 20px;
@@ -302,13 +312,42 @@ button, input[type="submit"], input[type="reset"] {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
+    margin-right: 10px;
 }
 
-button:hover, input[type="submit"]:hover {
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover {
     background-color: var(--culoare-secundara);
 }
 
-/* Panou Widget (Card) */
+/* EROARE VALIDARE VARSTA (HTML5 + CSS) */
+.eroare-validare {
+    display: none;
+    color: white;
+    background-color: #d32f2f;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+input[type="number"]:invalid + .eroare-validare {
+    display: inline-block;
+    animation: apareEroare 0.3s ease-in-out;
+}
+
+input[type="number"]:invalid {
+    border-color: #d32f2f;
+    box-shadow: 0 0 5px rgba(211, 47, 47, 0.5);
+}
+
+@keyframes apareEroare {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Panou Widget (ex: Obiective, Ajutor Rapid) */
 .widget-card {
     background: white;
     border-left: 5px solid var(--culoare-primara);
@@ -322,72 +361,73 @@ button:hover, input[type="submit"]:hover {
 .widget-card:hover {
     transform: translateY(-5px);
 }
-/* Ascundem mesajul de eroare în mod implicit */
-.eroare-validare {
-    display: none;
-    color: red;
-    font-size: 0.85em;
-    font-weight: bold;
-    margin-left: 10px;
-    background-color: #ffe6e6;
-    padding: 3px 8px;
+
+details summary {
+    cursor: pointer;
+    color: var(--culoare-primara);
+}
+/* ==========================================================
+   STILIZARE EXTRA: CRITERII PAROLA
+   ========================================================== */
+.parola-criterii {
+    background-color: #fafafa;
+    border-left: 4px solid var(--culoare-accent);
+    padding: 12px 15px;
+    margin-top: -10px;
+    margin-bottom: 20px;
     border-radius: 4px;
-    border: 1px solid red;
+    font-size: 0.85em;
+    color: #555;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-/* Când input-ul devine invalid (ex: scrii 46 iar max este 45), 
-   selectăm elementul frate imediat următor (+) și îl afișăm 
-*/
-input[type="number"]:invalid + .eroare-validare {
-    display: inline-block;
-    animation: apareEroare 0.3s ease-in-out;
+.parola-criterii ul {
+    margin: 8px 0 0 0;
+    padding-left: 20px;
 }
 
-/* Facem și căsuța de input roșie pentru a atrage atenția */
-input[type="number"]:invalid {
-    border-color: red;
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+/* Magie de validare vizuală (Fără JS) 
+   Când scrii în parolă: e roșu dacă nu respecți regulile, verde dacă le respecți! */
+input[type="password"]:focus:invalid {
+    border-color: #d32f2f;
+    box-shadow: 0 0 8px rgba(211, 47, 47, 0.3);
 }
 
-/* O mică animație ca să apară frumos */
-@keyframes apareEroare {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: translateX(0); }
+input[type="password"]:focus:valid {
+    border-color: var(--culoare-secundara);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
 }
 
 /* ==========================================================
-   8. FOOTER IMBUNATATIT
-   Cerință: Așezat jos; Look & Feel unitar; Iconițe FontAwesome
+   8. FOOTER IMBUNATATIT (3 Coloane)
    ========================================================== */
 footer {
-    background-color: #1a1a1a; /* Un gri foarte închis, elegant */
+    background-color: #1a1a1a;
     color: var(--text-deschis);
-    padding: 40px 20px 20px; /* Mult mai înalt, cu spațiu sus */
-    font-family: var(--font-principal);
-    margin-top: auto; /* Asigură că rămâne împins jos de main */
-    /* Ca să nu fie acoperit de meniul tău fix din Varianta 1: */
-    padding-bottom: 80px; 
+    padding: 40px 20px 20px;
+    margin-top: auto; 
+    padding-bottom: 80px; /* Ca sa nu fie ascuns de meniu */
 }
 
 .footer-content {
-    display: flex; /* Așează coloanele pe același rând */
-    flex-wrap: wrap; /* Pe mobil le trece pe rânduri noi */
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     max-width: 1100px;
     margin: 0 auto;
-    border-bottom: 1px solid #333; /* O linie subtilă despărțitoare */
+    border-bottom: 1px solid #333;
     padding-bottom: 20px;
 }
 
 .footer-sectiune {
     flex: 1;
-    min-width: 250px; /* Lățime minimă ca să nu se înghesuie */
+    min-width: 250px;
     margin: 10px 20px;
     text-align: left;
 }
 
 .footer-sectiune h3 {
-    color: var(--culoare-accent); /* Folosește galbenul din variabile */
+    color: var(--culoare-accent);
     margin-bottom: 15px;
     font-size: 1.2em;
 }
@@ -399,13 +439,12 @@ footer {
 }
 
 .footer-sectiune p i {
-    color: var(--culoare-secundara); /* Iconițele de contact verzi */
+    color: var(--culoare-secundara);
     margin-right: 10px;
     width: 20px;
     text-align: center;
 }
 
-/* Iconițele de Social Media */
 .social-icons a {
     color: white;
     font-size: 1.8em;
@@ -415,8 +454,8 @@ footer {
 }
 
 .social-icons a:hover {
-    color: var(--culoare-accent); /* Se fac galbene la hover */
-    transform: translateY(-5px); /* Se ridică puțin la hover */
+    color: var(--culoare-accent);
+    transform: translateY(-5px);
 }
 
 .footer-bottom {
@@ -427,31 +466,28 @@ footer {
 }
 
 /* ==========================================================
-   9. RESPONSIVE DESIGN 
-   Cerință: Minimum două media queries (telefoane și tablete)
+   9. RESPONSIVE DESIGN (Media Queries minime 2)
    ========================================================== */
-
-/* Prag 1: Tablete (Sub 768px) */
+/* Prag 1: Tablete */
 @media (max-width: 768px) {
-    .menu-principal {
-        flex-direction: row; 
-    }
     .menu-principal > li > a {
         padding: 15px 10px;
         font-size: 0.9em;
     }
+    .large-view { height: 350px; }
 }
 
-/* Prag 2: Telefoane (Sub 480px) */
+/* Prag 2: Telefoane Mobile */
 @media (max-width: 480px) {
-    .logo {
-        font-size: 1.8em;
+    header h1 {
+        font-size: 1.5em;
     }
     .menu-principal > li > a {
         font-size: 0.8em;
         padding: 10px 5px;
     }
-    /* Transformare tabel pentru mobil (păstrarea look & feel) */
+    
+    /* Transformare Tabel */
     table, thead, tbody, th, td, tr {
         display: block; 
     }
@@ -459,9 +495,20 @@ footer {
         display: none; 
     }
     td {
-        position: relative;
         padding-left: 50%;
         text-align: right;
         border-bottom: 1px solid #eee;
     }
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+    }
+    
+    /* Adaptare Slider */
+    .large-view { height: 250px; }
+    .thumb { width: 80px; height: 60px; }
 }

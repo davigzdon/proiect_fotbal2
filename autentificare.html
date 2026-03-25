@@ -2,92 +2,114 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>FC Programare Web - Acces Cont</title>
+    <title>Autentificare - FC Programare Web</title>
     <link rel="stylesheet" href="stil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Portal Membri</h1>
+        <h1>Management Club Fotbal - Acces Portal</h1>
     </header>
 
     <nav>
-    <ul class="menu-principal">
-        <li><a href="index.html">Acasă</a></li>
-        
-        <li class="are-submeniu">
-            <a href="#">Echipă <i class="fas fa-caret-up"></i></a>
-            <ul class="submenu">
-                <li><a href="index.html">Lot Seniori</a></li>
-                <li><a href="index.html">Grupe Juniori</a></li>
-            </ul>
-        </li>
+        <ul class="menu-principal">
+            <li><a href="index.html">Acasă</a></li>
+            
+            <li class="are-submeniu">
+                <a href="#">Echipă <i class="fas fa-caret-up"></i></a>
+                <ul class="submenu">
+                    <li><a href="index.html">Lot Seniori</a></li>
+                    <li><a href="index.html">Grupe Juniori</a></li>
+                </ul>
+            </li>
 
-        <li><a href="autentificare.html">Autentificare</a></li>
-        <li><a href="administrare.html">Administrare Lot</a></li>
-    </ul>
-</nav>
+            <li><a href="autentificare.html">Autentificare</a></li>
+            <li><a href="administrare.html">Administrare Lot</a></li>
+        </ul>
+    </nav>
 
     <main>
         <section>
-            <h2>Autentificare Utilizator</h2> 
-            <article>
-                <h3>Intră în cont</h3>
-                <form action="#" method="post">
+            <h2>Ai deja cont? Autentifică-te</h2>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Conectare</legend>
                     <p>
-                        <label for="user">Nume utilizator:</label>
-                        <input type="text" id="user" name="user" required placeholder="Ex: david10">
+                        <label>E-mail <span style="color: red; font-weight: bold;">*</span>:</label>
+                        <input type="email" name="login_email" required placeholder="nume@exemplu.ro">
                     </p>
                     <p>
-                        <label for="pass">Parolă:</label>
-                        <input type="password" id="pass" name="pass" required>
+                        <label>Parolă <span style="color: red; font-weight: bold;">*</span>:</label>
+                        <input type="password" name="login_pass" required>
                     </p>
-                    <button type="submit">Autentificare</button>
-                </form>
-            </article>
+                    <p>
+                        <input type="checkbox" name="remember"> Ține-mă minte pe acest dispozitiv
+                    </p>
+                </fieldset>
+                <p>
+                    <button type="submit"><i class="fas fa-sign-in-alt"></i> Intră în cont</button>
+                    <a href="#" style="margin-left: 15px; color: var(--culoare-primara); text-decoration: none; font-size: 0.9em;">Ai uitat parola?</a>
+                </p>
+            </form>
         </section>
 
-        <hr>
+        <section style="margin-top: 50px;">
+            <h2>Nu ai cont? Creare Cont Nou</h2>
+            <p><small>Câmpurile marcate cu <span style="color: red; font-weight: bold;">*</span> sunt obligatorii.</small></p>
 
-        <section>
-            <h2>Creare Cont Nou</h2>
-            <article>
-                <h3>Înregistrare Suporter</h3>
-                <p>Alătură-te comunității noastre pentru noutăți despre <strong>Lotul de Seniori</strong>.</p>
-                
-                <form action="#" method="post">
-                    <fieldset>
-                        <legend>Date înregistrare</legend>
-                        <p>
-                            <label>Adresă de e-mail:</label>
-                            <input type="email" name="email" required placeholder="nume@exemplu.ro">
-                        </p>
-                        <p>
-                            <label>Alege rolul tău:</label><br>
-                            <input type="radio" name="rol" value="s" checked> Suporter simplu<br>
-                            <input type="radio" name="rol" value="j"> Staff club<br>
-                            <input type="radio" name="rol" value="a"> Administrator 
-                        </p>
-                        <p>
-                            <input type="checkbox" name="termeni" required> 
-                            Sunt de acord cu prelucrarea datelor conform regulamentului.
-                        </p>
-                        <p>
-                            <input type="submit" value="Înregistrează-te">
-                        </p>
-                    </fieldset>
-                </form>
-            </article>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Înregistrare Suporter / Staff</legend>
+                    
+                    <p>
+                        <label>Adresă de e-mail <span style="color: red; font-weight: bold;">*</span>:</label>
+                        <input type="email" name="reg_email" required placeholder="nume@exemplu.ro">
+                    </p>
+                    
+                    <p>
+                        <label>Parolă <span style="color: red; font-weight: bold;">*</span>:</label>
+                        <input type="password" name="reg_pass" required 
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                               title="Parola trebuie să conțină minim 8 caractere, o literă mare, o literă mică și un număr.">
+                    </p>
+
+                    <div class="parola-criterii">
+                        <strong><i class="fas fa-shield-alt"></i> Criterii parolă securizată:</strong>
+                        <ul>
+                            <li>Minim 8 caractere în total</li>
+                            <li>Cel puțin o literă mare (A-Z)</li>
+                            <li>Cel puțin o literă mică (a-z)</li>
+                            <li>Cel puțin o cifră (0-9)</li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        <label>Alege rolul tău:</label><br>
+                        <input type="radio" name="rol" value="suporter" checked> Suporter simplu<br>
+                        <input type="radio" name="rol" value="staff"> Staff club<br>
+                        <input type="radio" name="rol" value="admin"> Administrator
+                    </p>
+                    
+                    <p>
+                        <input type="checkbox" name="tc" required> Sunt de acord cu prelucrarea datelor.
+                    </p>
+                </fieldset>
+
+                <p>
+                    <button type="submit"><i class="fas fa-user-plus"></i> Înregistrează-te</button>
+                    <button type="reset" style="background-color: #555;"><i class="fas fa-eraser"></i> Șterge Date</button>
+                </p>
+            </form>
         </section>
 
         <aside>
-            <section>
-                <h3>Informații Suplimentare</h3>
+            <div class="widget-card">
+                <h2>Informații Suplimentare</h2>
                 <details>
                     <summary>De ce să îți faci cont?</summary>
-                    <p>Membrii înregistrați au acces la statistici detaliate și primesc notificări despre antrenamentele echipei</p>
+                    <p>Prin crearea unui cont vei avea acces la materiale exclusive, reduceri la bilete pentru Lotul de Seniori și posibilitatea de a interacționa cu staff-ul echipei.</p>
                 </details>
-            </section>
+            </div>
         </aside>
     </main>
 
