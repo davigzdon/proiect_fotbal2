@@ -2,6 +2,7 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC Programare Web</title>
     <link rel="stylesheet" href="stil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,76 +12,79 @@
         <h1>Management Club Fotbal - Vizualizare Lot</h1>
     </header>
 
-<nav>
-    <ul class="menu-principal">
-        <li><a href="index.html">Acasă</a></li>
-        
-        <li class="are-submeniu">
-            <a href="#">Echipă <i class="fas fa-caret-up"></i></a>
-            <ul class="submenu">
-                <li><a href="index.html">Lot Seniori</a></li>
-                <li><a href="juniori.html">Grupe Juniori</a></li>
-            </ul>
-        </li>
+    <nav>
+        <ul class="menu-principal">
+            <li><a href="index.html">Acasă</a></li>
+            
+            <li class="are-submeniu">
+                <a href="#">Echipă <i class="fas fa-caret-up"></i></a>
+                <ul class="submenu">
+                    <li><a href="index.html">Lot Seniori</a></li>
+                    <li><a href="juniori.html">Grupe Juniori</a></li>
+                </ul>
+            </li>
 
-        <li><a href="autentificare.html">Autentificare</a></li>
-        <li><a href="administrare.html">Administrare Lot</a></li>
-    </ul>
-</nav>
+            <li><a href="autentificare.html">Autentificare</a></li>
+            <li><a href="administrare.html">Administrare Lot</a></li>
+        </ul>
+    </nav>
 
     <main>
         <section>
             <h2>Lotul de Seniori 2024</h2>
             <article>
                 <h3>Performante Jucatori</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Jucator</th>
-                            <th>Pozitie</th>
-                            <th>Detalii</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <figure>
-                                    <img src="imagine_portar.jfif" alt="Portar" width="120">
-                                    <figcaption>Marius Popa</figcaption>
-                                </figure>
-                            </td>
-                            <td>Portar</td>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td rowspan="2">Statistici</td>
-                                        <td>Parade: 25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Meciuri fara gol: 10</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                
+                <div class="container-tabel-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Imagine Jucător</th>
+                                <th>Informații Jucător</th>
+                                <th>Detalii Tehnice</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="element-cu-tooltip">
+                                        <img src="imagine_portar.jfif" alt="Portar" class="img-tabel">
+                                        <div class="info-extra">Transferat în 2023 de la CFR Cluj. Contract până în 2027.</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="element-cu-tooltip text-tabel">
+                                        <strong>Marius Popa</strong> (Portar)
+                                        <div class="info-extra">Căpitanul echipei. Desemnat portarul lunii octombrie.</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="element-cu-tooltip text-tabel">
+                                        Parade: 25 <br> Meciuri fără gol: 10
+                                        <div class="info-extra">Rata de salvare a șuturilor: 85%.</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </article>
         </section>
-    <section>
-    <h2>Galerie Foto Lot</h2>
-    
-    <div class="css-slider">
-    <img src="imagine_portar.jfif" class="thumb t1" alt="Jucător 1">
-    <img src="imagine_atacant.jfif" class="thumb t2" alt="Jucător 2">
-    <img src="imagine_portar.jfif" class="thumb t3" alt="Jucător 3">
 
-    <div class="large-view">
-        <img src="imagine_portar.jfif" class="large-img l1" alt="Jucător 1 Mare">
-        <img src="imagine_atacant.jfif" class="large-img l2" alt="Jucător 2 Mare">
-        <img src="imagine_portar.jfif" class="large-img l3" alt="Jucător 3 Mare">
-    </div>
-</div>
-    </section>
+        <section>
+            <h2>Galerie Foto Lot</h2>
+            <div class="css-slider">
+                <img src="imagine_portar.jfif" class="thumb t1" alt="Jucător 1">
+                <img src="imagine_atacant.jfif" class="thumb t2" alt="Jucător 2">
+                <img src="imagine_portar.jfif" class="thumb t3" alt="Jucător 3">
+
+                <div class="large-view">
+                    <img src="imagine_portar.jfif" class="large-img l1" alt="Jucător 1 Mare">
+                    <img src="imagine_atacant.jfif" class="large-img l2" alt="Jucător 2 Mare">
+                    <img src="imagine_portar.jfif" class="large-img l3" alt="Jucător 3 Mare">
+                </div>
+            </div>
+        </section>
 
         <aside>
             <div class="widget-card">
@@ -107,7 +111,7 @@
         </aside>
     </main>
 
-<footer>
+    <footer>
         <div class="footer-content">
             <div class="footer-sectiune">
                 <h3>FC Programare Web</h3>

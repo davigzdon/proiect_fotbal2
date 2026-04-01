@@ -2,14 +2,12 @@
    1. VARIABILE 
    ========================================================== */
 :root {
-    /* Definirea de proprietăți custom (CSS Custom Properties) pentru o modificare ușoară și unitară a paletei de culori */
-    --culoare-primara: #2E7D32; /* Verde inchis */
-    --culoare-secundara: #4CAF50; /* Verde deschis */
-    --culoare-accent: #FFC107; /* Galben / Auriu */
+    --culoare-primara: #2E7D32; 
+    --culoare-secundara: #4CAF50; 
+    --culoare-accent: #FFC107; 
     --text-deschis: #FFFFFF;
     --text-inchis: #333333;
     --fundal-gri: #f4f4f4;
-    /* Durata animației pentru bordura/background-ul elementului activ din meniu, conform cerinței "de câteva secunde" */
     --timp-animatie-meniu: 2s; 
     --font-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -24,23 +22,20 @@ html, body {
     font-family: var(--font-principal);
     color: var(--text-inchis);
     background-color: var(--fundal-gri);
-    /* Folosirea CSS Flexbox pe body pentru a gestiona structura pe verticală și a asigura că footer-ul rămâne jos */
     display: flex;
     flex-direction: column; 
 }
 
 main {
-    /* Main-ul preia spațiul disponibil; dacă apare scroll vertical, împinge footer-ul în partea de jos a ferestrei */
     flex: 1; 
     padding: 20px;
-    padding-bottom: 80px; /* Previne suprapunerea conținutului cu meniul fixat la bază */
+    padding-bottom: 80px; 
 }
 
 /* ==========================================================
    3. HEADER ȘI LOGO ANIMAT
    ========================================================== */
 header {
-    /* Aplicarea unui gradient liniar pentru culoarea de fundal din header */
     background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara)); 
     color: var(--text-deschis);
     padding: 30px 20px;
@@ -50,12 +45,11 @@ header {
 
 .logo, header h1 {
     display: inline-block;
-    transition: transform 0.5s ease; /* Pregătirea tranziției pentru animația de la hover */
+    transition: transform 0.5s ease; 
     margin: 0;
     cursor: pointer;
 }
 
-/* Animație CSS3 pe logo la hover: mărire și rotire ușoară */
 header h1:hover {
     transform: scale(1.1) rotate(2deg);
 }
@@ -64,7 +58,6 @@ header h1:hover {
    4. MENIU - VARIANTA 1 (Orizontal, Jos, Submeniu in Sus)
    ========================================================== */
 nav {
-    /* Poziționare orizontală în partea de jos a browser-ului */
     position: fixed;
     bottom: 0;
     left: 0;
@@ -82,7 +75,7 @@ nav {
 }
 
 .menu-principal > li {
-    position: relative; /* Context pentru poziționarea submeniului absolut */
+    position: relative; 
 }
 
 .menu-principal > li > a {
@@ -92,26 +85,23 @@ nav {
     text-decoration: none;
     font-weight: bold;
     border-top: 4px solid transparent;
-    /* Animația care durează "câteva secunde" pentru fundal și bordură */
     transition: background-color var(--timp-animatie-meniu) ease, border-top var(--timp-animatie-meniu) ease;
 }
 
-/* La hover, se activează tranziția pe item-ul din meniu */
 .menu-principal > li > a:hover {
     background-color: var(--culoare-primara);
     border-top: 4px solid var(--culoare-accent);
 }
 
-/* SUBMENIU: Structurat să se deschidă de jos în sus, peste meniul principal */
 .submenu {
     position: absolute;
-    bottom: 100%; /* Plasează submeniul deasupra părintelui său */
+    bottom: 100%; 
     left: 0;
     background-color: #222;
     list-style: none;
     padding: 0;
     margin: 0;
-    display: none; /* Ascuns până la hover */
+    display: none; 
     min-width: 180px;
     box-shadow: 0 -4px 6px rgba(0,0,0,0.3);
 }
@@ -129,89 +119,98 @@ nav {
     background-color: var(--culoare-secundara);
 }
 
-/* Afișarea submeniului cu pseudo-clasa :hover pe elementul părinte */
 .are-submeniu:hover .submenu {
     display: block; 
 }
 
 /* ==========================================================
-   5. TABEL STILIZAT (Dinamic, Hover pe Celula, Tooltip)
+   5. TABEL STILIZAT (Responsive + Tooltip pe Imagine/Text)
    ========================================================== */
-/* Stilizarea generală a tabelului de informații */
+.container-tabel-responsive {
+    width: 100%;
+    overflow-x: auto; 
+    margin: 20px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-radius: 8px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
     background-color: white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    border-radius: 8px;
-    overflow: hidden; 
+    min-width: 600px; 
 }
 
 th, td {
     padding: 15px;
     text-align: center;
     border-bottom: 1px solid #eee;
-    transition: all 0.3s ease; 
-    position: relative;
 }
 
 th {
     background-color: var(--culoare-primara);
     color: white;
-    font-size: 1.1em;
     text-transform: uppercase;
 }
 
-/* Resetare pentru tabelele imbricate (ex. Statistici) */
-table table {
-    margin: 0;
-    box-shadow: none;
-    border-radius: 0;
-}
-table table td {
-    border: 1px solid #eee;
-}
-
-/* Efect dinamic la hover pe celulele de text/imagine din tabel */
-td:hover {
-    background-color: #f1f8e9;
-    transform: scale(1.03); 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 4px;
-    z-index: 2; 
-}
-
-/* Div-ul pentru informații suplimentare; ascuns în starea normală */
-.info-extra {
-    display: none;
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translate(-50%, -100%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px;
+.img-tabel {
+    width: 100px;
     border-radius: 5px;
-    white-space: nowrap;
-    z-index: 10;
+    transition: transform 0.3s ease;
+    display: block;
+    margin: 0 auto;
 }
 
-/* Utilizarea unui pseudo-element (::after) pentru a crea o săgeată (tooltip) */
+/* Containerul care se mulează perfect pe text/imagine */
+.element-cu-tooltip {
+    position: relative;
+    display: inline-block; 
+    cursor: pointer;
+}
+
+.text-tabel {
+    border-bottom: 1px dashed var(--culoare-primara);
+    padding-bottom: 2px;
+}
+
+/* Div-ul de informații ascuns */
+.info-extra {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 120%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 0.9em;
+    z-index: 100;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none; 
+}
+
 .info-extra::after {
     content: "";
     position: absolute;
     top: 100%;
     left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
+    margin-left: -6px;
+    border-width: 6px;
     border-style: solid;
-    border-color: rgba(0,0,0,0.8) transparent transparent transparent;
+    border-color: rgba(0,0,0,0.9) transparent transparent transparent;
 }
 
-/* Afișarea div-ului cu informații suplimentare la hover pe celulă */
-td:hover .info-extra {
-    display: block; 
+/* Tooltip-ul apare DOAR dacă mouse-ul e pe elementul învelitor */
+.element-cu-tooltip:hover .info-extra {
+    visibility: visible;
+    opacity: 1;
+}
+
+.element-cu-tooltip:hover .img-tabel {
+    transform: scale(1.05); 
 }
 
 /* ==========================================================
@@ -226,8 +225,6 @@ td:hover .info-extra {
     margin: 30px auto;
 }
 
-/* Container pentru versiunea de dimensiuni mai mari a imaginii. 
-   Proprietatea order rearanjează vizual flex-item-ul deasupra liniei de thumbnail-uri */
 .large-view {
     order: -1; 
     width: 100%;
@@ -250,9 +247,8 @@ td:hover .info-extra {
     transition: opacity 0.4s ease-in-out;
 }
 
-.large-img.l1 { opacity: 1; z-index: 1; } /* Afișează prima imagine implicit */
+.large-img.l1 { opacity: 1; z-index: 1; } 
 
-/* Linia de imagini de tip thumbnail */
 .thumb {
     width: 120px;
     height: 80px;
@@ -268,7 +264,6 @@ td:hover .info-extra {
     border-color: var(--culoare-accent);
 }
 
-/* Mecanism fără JavaScript: Selectorul de frate general (~) afișează imaginea mare asociată thumbnail-ului pe care este așezat mouse-ul */
 .t1:hover ~ .large-view .l1 { opacity: 1; z-index: 2; }
 .t2:hover ~ .large-view .l2 { opacity: 1; z-index: 2; }
 .t3:hover ~ .large-view .l3 { opacity: 1; z-index: 2; }
@@ -297,7 +292,6 @@ legend {
     color: var(--culoare-primara);
 }
 
-/* Stilizarea elementelor de formular: input, select, textarea */
 input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"], select, textarea {
     width: 100%;
     padding: 12px;
@@ -308,14 +302,12 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Pseudo-clasa :focus pentru a stiliza momentul activării input-urilor */
 input:focus, select:focus, textarea:focus {
     border-color: var(--culoare-primara);
     box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
     outline: none;
 }
 
-/* Stilizarea controalelor de tip buton și input de trimitere/resetare */
 button, input[type="submit"], input[type="reset"], input[type="button"] {
     background-color: var(--culoare-primara);
     color: white;
@@ -332,7 +324,6 @@ button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type=
     background-color: var(--culoare-secundara);
 }
 
-/* Validare vizuală pentru erorile de vârstă, folosind pseudo-clasa :invalid */
 .eroare-validare {
     display: none;
     color: white;
@@ -345,7 +336,6 @@ button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type=
     border-radius: 4px;
 }
 
-/* Când un input de tip number este invalid, afișează mesajul de eroare alăturat (+) */
 input[type="number"]:invalid + .eroare-validare {
     display: inline-block;
     animation: apareEroare 0.3s ease-in-out;
@@ -361,7 +351,6 @@ input[type="number"]:invalid {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Implementarea unui panou informativ stilizat (Widget/Card) pentru elementele laterale */
 .widget-card {
     background: white;
     border-left: 5px solid var(--culoare-primara);
@@ -401,7 +390,6 @@ details summary {
     padding-left: 20px;
 }
 
-/* Indicatori vizuali bazați pe stările de validare ale input-ului (fără necesitatea de scripturi) */
 input[type="password"]:focus:invalid {
     border-color: #d32f2f;
     box-shadow: 0 0 8px rgba(211, 47, 47, 0.3);
@@ -413,13 +401,13 @@ input[type="password"]:focus:valid {
 }
 
 /* ==========================================================
-   8. FOOTER  (3 Coloane)
+   8. FOOTER IMBUNATATIT (3 Coloane)
    ========================================================== */
 footer {
     background-color: #1a1a1a;
     color: var(--text-deschis);
     padding: 40px 20px 20px;
-    margin-top: auto; /* Element ajutător pentru structura Flexbox a documentului, ținând footer-ul la bază */
+    margin-top: auto; 
     padding-bottom: 80px; 
 }
 
@@ -459,7 +447,6 @@ footer {
     text-align: center;
 }
 
-/* Iconițele folosesc sprite-uri/fonturi (ex: FontAwesome) prevăzute pentru interfață */
 .social-icons a {
     color: white;
     font-size: 1.8em;
@@ -483,9 +470,6 @@ footer {
 /* ==========================================================
    9. RESPONSIVE DESIGN 
    ========================================================== */
-/* Definirea a minim două reguli '@media' pentru adaptabilitatea pe diferite ecrane */
-
-/* Prag 1: Dispozitive de tip Tabletă */
 @media (max-width: 768px) {
     .menu-principal > li > a {
         padding: 15px 10px;
@@ -494,7 +478,6 @@ footer {
     .large-view { height: 350px; }
 }
 
-/* Prag 2: Dispozitive mobile (telefoane) */
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.5em;
@@ -504,29 +487,6 @@ footer {
         padding: 10px 5px;
     }
     
-    /* Adaptarea tabelului de date pe ecrane mici, schimbând modul de afișare pentru o mai bună lecturare */
-    table, thead, tbody, th, td, tr {
-        display: block; 
-    }
-    th {
-        display: none; 
-    }
-    td {
-        padding-left: 50%;
-        text-align: right;
-        border-bottom: 1px solid #eee;
-    }
-    /* Generare automată a etichetelor celulelor pentru layout-ul vertical pe mobil */
-    td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 15px;
-        width: 45%;
-        text-align: left;
-        font-weight: bold;
-    }
-    
-    /* Reajustarea dimensiunilor slider-ului pe ecrane mici */
     .large-view { height: 250px; }
     .thumb { width: 80px; height: 60px; }
 }
