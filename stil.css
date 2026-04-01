@@ -523,3 +523,66 @@ footer {
     background-color: #f44336; /* Roșu */
     box-shadow: 0 0 5px #f44336;
 }
+
+/* ==========================================================
+   10. LISTĂ ȘTIRI ANIMATĂ (Lab 3 - Exercițiul 4)
+   ========================================================== */
+.stiri-container {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    position: relative;
+    /* Un min-height previne "săritul" paginii când știrile au lungimi diferite */
+    min-height: 120px; 
+}
+
+#lista-stiri {
+    list-style: none; /* Scoatem punctele standard ale listei */
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+/* Ascundem toate <li>-urile inițial (cu opacitate pentru tranziție) */
+#lista-stiri li {
+    position: absolute; /* Le punem unele peste altele */
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+}
+
+/* Doar stirea cu clasa 'stire-activa' se vede */
+#lista-stiri li.stire-activa {
+    opacity: 1;
+    visibility: visible;
+    position: relative; /* Ca să împingă butoanele în jos corect */
+}
+
+#lista-stiri li div {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+#lista-stiri li a {
+    color: var(--culoare-primara);
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.3s;
+}
+
+#lista-stiri li a:hover {
+    border-bottom: 1px solid var(--culoare-primara);
+}
+
+.stiri-controale {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}

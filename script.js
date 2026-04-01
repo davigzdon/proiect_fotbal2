@@ -212,4 +212,61 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    // ==========================================
+    // EXERCIȚIUL 4: LISTĂ ȘTIRI (Slider Text)
+    // ==========================================
+    const listaStiri = document.getElementById("lista-stiri");
+    
+    // Rulăm codul doar dacă lista de știri există pe pagină (doar în index.html)
+    if (listaStiri !== null) {
+        const stiri = listaStiri.querySelectorAll("li");
+        const btnPrev = document.getElementById("btn-prev");
+        const btnNext = document.getElementById("btn-next");
+        
+        let indexStireCurenta = 0;
+        const timpTranzitie = 5000; // n = 5 secunde (5000 milisecunde)
+        let timerStiri; // Variabila care ține evidența timpului
+
+        // Funcția de bază care schimbă știrea
+        function afiseazaStire(index) {
+            // 1. Ascundem știrea curentă
+            stiri[indexStireCurenta].classList.remove("stire-activa");
+            
+            // 2. Calculăm noul index (asigurăm circularitatea)
+            indexStireCurenta = index;
+            if (indexStireCurenta < 0) {
+                indexStireCurenta = stiri.length - 1; // Dacă dăm 'Prev' de la prima, mergem la ultima
+            } else if (indexStireCurenta >= stiri.length) {
+                indexStireCurenta = 0; // Dacă dăm 'Next' de la ultima, mergem la prima
+            }
+            
+            // 3. Afișăm noua știre
+            stiri[indexStireCurenta].classList.add("stire-activa");
+        }
+
+        // Funcție pentru pornirea automată a slider-ului
+        function startTimer() {
+            // Curățăm timer-ul anterior (ca să nu se "bâlbâie" dacă dăm click manual)
+            clearInterval(timerStiri);
+            
+            timerStiri = setInterval(function() {
+                afiseazaStire(indexStireCurenta + 1); // Trecem la următoarea din 5 în 5 sec.
+            }, timpTranzitie);
+        }
+
+        // Atașăm evenimente pe butoanele manuale
+        btnNext.addEventListener("click", function() {
+            afiseazaStire(indexStireCurenta + 1);
+            startTimer(); // Resetăm timer-ul ca să o ia de la capăt cele 5 secunde
+        });
+
+        btnPrev.addEventListener("click", function() {
+            afiseazaStire(indexStireCurenta - 1);
+            startTimer(); // Resetăm timer-ul
+        });
+
+        // La final, pornim mecanismul automat când se încarcă pagina
+        startTimer();
+    }
+
 });
