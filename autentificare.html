@@ -59,42 +59,51 @@
             <p><small>Câmpurile marcate cu <span style="color: red; font-weight: bold;">*</span> sunt obligatorii.</small></p>
 
             <form action="#" method="post">
-                <fieldset>
-                    <legend>Înregistrare Suporter / Staff</legend>
-                    
-                    <p>
-                        <label>Adresă de e-mail <span style="color: red; font-weight: bold;">*</span>:</label>
-                        <input type="email" name="reg_email" required placeholder="nume@exemplu.ro">
-                    </p>
-                    
-                    <p>
-                        <label>Parolă <span style="color: red; font-weight: bold;">*</span>:</label>
-                        <input type="password" name="reg_pass" required 
-                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                               title="Parola trebuie să conțină minim 8 caractere, o literă mare, o literă mică și un număr.">
-                    </p>
+                <fieldset id="form-inregistrare">
+    <legend>Înregistrare (Validare JS Lab 3)</legend>
+    
+    <div class="input-container">
+        <label>Nume utilizator (doar litere mici și cifre):</label>
+        <input type="text" id="username" placeholder="ex: david2024">
+        <span class="bulina-validare" id="bulina-user"></span>
+    </div>
 
-                    <div class="parola-criterii">
-                        <strong><i class="fas fa-shield-alt"></i> Criterii parolă securizată:</strong>
-                        <ul>
-                            <li>Minim 8 caractere în total</li>
-                            <li>Cel puțin o literă mare (A-Z)</li>
-                            <li>Cel puțin o literă mică (a-z)</li>
-                            <li>Cel puțin o cifră (0-9)</li>
-                        </ul>
-                    </div>
+    <div class="input-container">
+        <label>Cod referință (doar litere mici și cifre):</label>
+        <input type="text" id="referinta" placeholder="ex: promo99">
+        <span class="bulina-validare" id="bulina-ref"></span>
+    </div>
+    
+    <div class="input-container">
+        <label>Parolă (litere mari, mici, cifre și !):</label>
+        <input type="password" id="parola-lab" placeholder="ex: ParolaMea123!">
+        <span class="bulina-validare" id="bulina-parola"></span>
+    </div>
 
-                    <p>
-                        <label>Alege rolul tău:</label><br>
-                        <input type="radio" name="rol" value="suporter" checked> Suporter simplu<br>
-                        <input type="radio" name="rol" value="staff"> Staff club<br>
-                        <input type="radio" name="rol" value="admin"> Administrator
-                    </p>
-                    
-                    <p>
-                        <input type="checkbox" name="tc" required> Sunt de acord cu prelucrarea datelor.
-                    </p>
-                </fieldset>
+    <div class="input-container">
+        <label>E-mail oficial:</label>
+        <input type="email" id="email-lab" placeholder="nume@domeniu.ro">
+        <span class="bulina-validare" id="bulina-email"></span>
+    </div>
+
+    <div class="input-container">
+        <label>Telefon format (+40) 777 777 777:</label>
+        <input type="text" id="telefon-lab" placeholder="(+40) 712 345 678">
+        <span class="bulina-validare" id="bulina-tel"></span>
+    </div>
+    <div class="input-container">
+        <label>Dată calendaristică:</label>
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="data-lab" placeholder="ex: 31/01/2006" style="flex: 2;">
+            <select id="format-data" style="flex: 1;">
+                <option value="zz/ll/aaaa">zz/ll/aaaa</option>
+                <option value="ll/zz/aaaa">ll/zz/aaaa</option>
+                <option value="zz/ll/aa">zz/ll/aa</option>
+            </select>
+        </div>
+        <span class="bulina-validare" id="bulina-data" style="top: 45px;"></span>
+    </div>
+</fieldset>
 
                 <p>
                     <button type="submit"><i class="fas fa-user-plus"></i> Înregistrează-te</button>
@@ -142,5 +151,6 @@
             <p>Proiect realizat de David Dumitreasa.</p>
         </div>
     </footer>
+<script src = "script.js"></script>
 </body>
 </html>

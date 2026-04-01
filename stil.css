@@ -490,3 +490,36 @@ footer {
     .large-view { height: 250px; }
     .thumb { width: 80px; height: 60px; }
 }
+
+/* ==========================================================
+   LABORATOR 3 - BULINE VALIDARE JS
+   ========================================================== */
+.input-container {
+    position: relative;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* Bulina de stare */
+.bulina-validare {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #ccc; /* Gri implicit (necompletat) */
+    position: absolute;
+    right: 15px;
+    top: 42px; /* Ajustat pentru a fi centrat pe input */
+    transition: background-color 0.3s ease;
+}
+
+/* Clasele care vor fi adăugate din JavaScript */
+.bulina-validare.valid {
+    background-color: #4CAF50; /* Verde */
+    box-shadow: 0 0 5px #4CAF50;
+}
+
+.bulina-validare.invalid {
+    background-color: #f44336; /* Roșu */
+    box-shadow: 0 0 5px #f44336;
+}

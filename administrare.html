@@ -31,71 +31,70 @@
 
     <main>
         <section>
-            <h2>Editare Date Sportiv</h2>
+            <h2>Panou de Control - Staff Tehnic</h2>
             
-            <p><small>Câmpurile marcate cu <span style="color: red; font-weight: bold;">*</span> sunt obligatorii.</small></p>
-
             <form action="#" method="post">
                 <fieldset>
-                    <legend>Identitate</legend>
-                    <p>
-                        <label>Nume <span style="color: red; font-weight: bold;">*</span>:</label> 
-                        <input type="text" name="n" required>
-                    </p>
-                    <p>
-                        <label>Prenume <span style="color: red; font-weight: bold;">*</span>:</label> 
-                        <input type="text" name="p" required>
-                    </p>
-                    <p>
-                        <label>ID Sistem:</label> 
-                        <input type="text" value="SYS-2026" readonly>
-                    </p> 
+                    <legend>Adăugare Jucător Nou</legend>
+                    
+                    <div class="input-container">
+                        <label>Nume Jucător:</label>
+                        <input type="text" name="nume_jucator" placeholder="Ex: Popescu Ion" required>
+                    </div>
+
+                    <div class="input-container">
+                        <label>Poziție în teren:</label>
+                        <select name="pozitie" required>
+                            <option value="">-- Alege Poziția --</option>
+                            <option value="Portar">Portar</option>
+                            <option value="Fundaș">Fundaș</option>
+                            <option value="Mijlocaș">Mijlocaș</option>
+                            <option value="Atacant">Atacant</option>
+                        </select>
+                    </div>
+
+                    <div class="input-container">
+                        <label>Vârstă (16-45):</label> 
+                        <input type="number" name="v" min="16" max="45" step="1" value="20" required>
+                        <span class="eroare-validare">⚠ Vârsta maximă admisă este de 45 de ani!</span>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                    
+                    <h3>Date de Proveniență</h3>
+                    <div class="input-container">
+                        <label>Județ Naștere:</label>
+                        <select id="judet-select" required>
+                            <option value="">-- Alege Județul --</option>
+                            <option value="Cluj">Cluj</option>
+                            <option value="Bucuresti">București</option>
+                            <option value="Timis">Timiș</option>
+                            <option value="Iasi">Iași</option>
+                        </select>
+                    </div>
+
+                    <div class="input-container">
+                        <label>Oraș Naștere:</label>
+                        <select id="oras-select" required disabled>
+                            <option value="">-- Alege întâi județul --</option>
+                        </select>
+                    </div>
+
                 </fieldset>
 
-                <fieldset>
-                    <legend>Parametri Tehnici</legend>
-                    <p>
-                        <label>Vârstă (16-45):</label> 
-                        <input type="number" name="v" min="16" max="45" step="1" value="20">
-                        <span class="eroare-validare">⚠ Vârsta admisă este intre 16 și 45 de ani!</span>
-                    </p>
-                    <p>
-                        <label>Nivel Energie (0-100):</label> 
-                        <input type="range" name="e" min="0" max="100">
-                    </p>
-                    <p>
-                        <label>Data Contract:</label> 
-                        <input type="date" name="d">
-                    </p>
-                    <p>
-                        <label>Club anterior:</label> 
-                        <input list="cluburi" name="c">
-                        <datalist id="cluburi">
-                            <option value="CFR Cluj">
-                            <option value="FCSB">
-                            <option value="Farul">
-                        </datalist>
-                    </p>
-                    <p>
-                        <label>Observații antrenor:</label><br>
-                        <textarea name="obs" rows="3" cols="40"></textarea>
-                    </p>
-                </fieldset>
-                
                 <p>
-                    <input type="submit" value="Salvează Date">
-                    <input type="reset" value="Resetează">
-                    <button type="button">Verifică Date</button>
+                    <button type="submit"><i class="fas fa-save"></i> Salvează Jucător</button>
+                    <button type="reset" style="background-color: #555;"><i class="fas fa-undo"></i> Resetează Formularul</button>
                 </p>
             </form>
         </section>
 
         <aside>
             <div class="widget-card">
-                <h2>Ajutor Rapid</h2>
-                <details>
-                    <summary>Instrucțiuni completare</summary>
-                    <p>Vă rugăm să completați cu atenție toate câmpurile obligatorii pentru a putea salva modificările în baza de date. ID-ul este generat automat.</p>
+                <h2><i class="fas fa-info-circle"></i> Ajutor Rapid</h2>
+                <details open>
+                    <summary>Instrucțiuni Adăugare</summary>
+                    <p style="padding-top: 10px; font-size: 0.9em; line-height: 1.5;">Asigurați-vă că vârsta jucătorului respectă limitele regulamentului intern (16-45 ani). Selectarea județului va debloca automat lista cu orașele aferente pentru a completa corect pașaportul sportiv.</p>
                 </details>
             </div>
         </aside>
@@ -126,8 +125,10 @@
         </div>
         
         <div class="footer-bottom">
-            <p>Proiect realizat de David Dumitreasa.</p>
+            <p>Copyright &copy; 2026 David Dumitreasa. Toate drepturile rezervate.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 
