@@ -269,4 +269,80 @@ document.addEventListener("DOMContentLoaded", function() {
         startTimer();
     }
 
+    // ==========================================
+    // EXERCIȚIUL 5: SLIDESHOW CONTROLAT (Play/Pause, Repeat, Viteza)
+    // ==========================================
+    const containerSlider = document.getElementById("slider-jucatori");
+
+    if (containerSlider !== null) {
+        const thumbs = containerSlider.querySelectorAll(".thumb");
+        const pozeMari = containerSlider.querySelectorAll(".large-img");
+        const btnPlay = document.getElementById("btn-play-pause");
+        const checkRepetare = document.getElementById("check-repetare");
+        const selectInterval = document.getElementById("select-interval");
+
+        let indexSlider = 0;
+        let estePornit = false;
+        let timerSlider;
+
+        function schimbaImaginea(index) {
+            // Curățăm starea activă de la toate pozele
+            pozeMari.forEach(img => img.classList.remove("js-active"));
+            thumbs.forEach(t => t.classList.remove("js-active-thumb"));
+
+            // Activăm poza nouă
+            indexSlider = index;
+            
+            // Verificăm limitele pentru repetare
+            if (indexSlider >= pozeMari.length) {
+                if (checkRepetare.checked) {
+                    indexSlider = 0; // O ia de la capăt
+                } else {
+                    opresteSlideshow(); // Se oprește la ultima poză
+                    return;
+                }
+            }
+
+            pozeMari[indexSlider].classList.add("js-active");
+            thumbs[indexSlider].classList.add("js-active-thumb");
+        }
+
+        function pornesteSlideshow() {
+            estePornit = true;
+            btnPlay.innerHTML = '<i class="fas fa-pause"></i> Pause';
+            
+            // Luăm valoarea intervalului din combobox
+            const intervalMilisecunde = parseInt(selectInterval.value);
+
+            timerSlider = setInterval(function() {
+                schimbaImaginea(indexSlider + 1);
+            }, intervalMilisecunde);
+        }
+
+        function opresteSlideshow() {
+            estePornit = false;
+            btnPlay.innerHTML = '<i class="fas fa-play"></i> Play';
+            clearInterval(timerSlider);
+        }
+
+        // Eveniment: Buton Play/Pause
+        btnPlay.addEventListener("click", function() {
+            if (estePornit) opresteSlideshow();
+            else pornesteSlideshow();
+        });
+
+        // Eveniment: Schimbare viteză în timp ce rulează
+        selectInterval.addEventListener("change", function() {
+            if (estePornit) {
+                opresteSlideshow();
+                pornesteSlideshow();
+            }
+        });
+        
+        // Permitem și click-ul manual pe thumbnail să reseteze poziția în slideshow
+        thumbs.forEach((t, i) => {
+            t.addEventListener("click", () => schimbaImaginea(i));
+        });
+    }
+
 });

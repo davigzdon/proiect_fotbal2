@@ -90,7 +90,7 @@
                             <tr>
                                 <td>
                                     <div class="element-cu-tooltip">
-                                        <img src="imagine_portar.jfif" alt="Fundaș" class="img-tabel">
+                                        <img src="imagine fundas.jfif" alt="Fundaș" class="img-tabel">
                                         <div class="info-extra">Aducere nouă din liga a 2-a.</div>
                                     </div>
                                 </td>
@@ -111,7 +111,7 @@
                             <tr>
                                 <td>
                                     <div class="element-cu-tooltip">
-                                        <img src="imagine_atacant.jfif" alt="Mijlocaș" class="img-tabel">
+                                        <img src="imagine mijlocas.jfif" alt="Mijlocaș" class="img-tabel">
                                         <div class="info-extra">Jucător internațional de tineret.</div>
                                     </div>
                                 </td>
@@ -158,19 +158,43 @@
                 </div>
             </div>
         </section>
-        
+
         <section>
             <h2>Galerie Foto Lot</h2>
             <div class="css-slider" id="slider-jucatori">
-                <img src="imagine_portar.jfif" class="thumb t1" alt="Jucător 1">
-                <img src="imagine_atacant.jfif" class="thumb t2" alt="Jucător 2">
-                <img src="imagine_portar.jfif" class="thumb t3" alt="Jucător 3">
+    <img src="imagine_portar.jfif" class="thumb t1" alt="Portar">
+    <img src="imagine_atacant.jfif" class="thumb t2" alt="Atacant">
+    <img src="imagine mijlocas.jfif" class="thumb t3" alt="Mijlocas">
+    <img src="imagine fundas.jfif" class="thumb t4" alt="Fundas">
+    <img src="imagine antrenor.jfif" class="thumb t5" alt="Antrenor">
 
-                <div class="large-view">
-                    <img src="imagine_portar.jfif" class="large-img l1" alt="Jucător 1 Mare">
-                    <img src="imagine_atacant.jfif" class="large-img l2" alt="Jucător 2 Mare">
-                    <img src="imagine_portar.jfif" class="large-img l3" alt="Jucător 3 Mare">
-                </div>
+    <div class="large-view">
+        <img src="imagine_portar.jfif" class="large-img l1" alt="Portar Mare">
+        <img src="imagine_atacant.jfif" class="large-img l2" alt="Atacant Mare">
+        <img src="imagine mijlocas.jfif" class="large-img l3" alt="Mijlocas Mare">
+        <img src="imagine fundas.jfif" class="large-img l4" alt="Fundas Mare">
+        <img src="imagine antrenor.jfif" class="large-img l5" alt="Antrenor Mare">
+    </div>
+</div>
+
+            <div class="slider-controle-js">
+                <button id="btn-play-pause" type="button">
+                    <i class="fas fa-play"></i> Play
+                </button>
+
+                <label>
+                    <input type="checkbox" id="check-repetare"> Repetare (Loop)
+                </label>
+
+                <label>
+                    Viteză (sec):
+                    <select id="select-interval">
+                        <option value="1000">1s</option>
+                        <option value="2000" selected>2s</option>
+                        <option value="3000">3s</option>
+                        <option value="5000">5s</option>
+                    </select>
+                </label>
             </div>
         </section>
 

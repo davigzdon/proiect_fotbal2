@@ -267,6 +267,8 @@ th {
 .t1:hover ~ .large-view .l1 { opacity: 1; z-index: 2; }
 .t2:hover ~ .large-view .l2 { opacity: 1; z-index: 2; }
 .t3:hover ~ .large-view .l3 { opacity: 1; z-index: 2; }
+.t4:hover ~ .large-view .l4 { opacity: 1; z-index: 2; }
+.t5:hover ~ .large-view .l5 { opacity: 1; z-index: 2; }
 
 /* ==========================================================
    7. FORMULAR STILIZAT, VALIDARE SI WIDGETURI
@@ -585,4 +587,33 @@ footer {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
+}
+
+/* ==========================================================
+   11. CONTROALE SLIDER JS (Lab 3 - Exercițiul 5)
+   ========================================================== */
+.slider-controle-js {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: #222;
+    color: white;
+    padding: 15px;
+    border-radius: 0 0 8px 8px;
+    margin-top: -30px; /* Îl lipim de slider */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Clasa pe care o va adăuga JS pentru a simula hover-ul */
+.large-img.js-active {
+    opacity: 1 !important;
+    z-index: 5;
+}
+
+.thumb.js-active-thumb {
+    border-color: var(--culoare-accent) !important;
+    transform: translateY(-5px);
 }
