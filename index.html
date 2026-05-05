@@ -222,6 +222,92 @@
             </div>
         </aside>
     </main>
+    <!-- LABORATORUL 4: EXERCIȚIUL 1 (Versiune Extinsă) -->
+        <section>
+            <h2>Momente de Top (jQuery Slider)</h2>
+            
+            <div class="jq-setari-slider">
+                <label>Imagini vizibile: 
+                    <input type="number" id="set-vizibile" value="2" min="1" max="4">
+                </label>
+                <label>Secunde: 
+                    <input type="number" id="set-secunde" value="3" min="1" max="10">
+                </label>
+                <button id="btn-aplica-setari" type="button">Aplică/Porneste</button>
+                <!-- Buton nou pentru oprire -->
+                <button id="btn-stop-slider" type="button" style="background: #e74c3c; color: white;">Stop</button>
+            </div>
+
+            <div class="jq-slider-container" id="slider-vertical">
+                <div class="jq-sageata jq-sus"><i class="fas fa-chevron-up"></i></div>
+                <div class="jq-viewport">
+                    <ul class="jq-lista-elemente">
+                        <li><img src="imagine_portar.jfif" alt="Highlight 1"></li>
+                        <li><img src="imagine_atacant.jfif" alt="Highlight 2"></li>
+                        <li><img src="imagine fundas.jfif" alt="Highlight 3"></li>
+                        <li><img src="imagine antrenor.jfif" alt="Highlight 4"></li>
+                        <!-- Poze noi adăugate -->
+                        <li><img src="imagine_portar.jfif" alt="Highlight 5"></li>
+                        <li><img src="imagine_atacant.jfif" alt="Highlight 6"></li>
+                        <li><img src="imagine mijlocas.jfif" alt="Highlight 7"></li>
+                    </ul>
+                </div>
+                <div class="jq-sageata jq-jos"><i class="fas fa-chevron-down"></i></div>
+            </div>
+        </section>
+
+        <section>
+    <h2>Filtrare Avansată Lot (jQuery)</h2>
+    <div class="panou-filtre">
+        <!-- 1. Căutare text (în Nume și Detalii) -->
+        <div class="filtru-grup">
+            <label>Căutare rapidă:</label>
+            <input type="text" id="cauta-jucator" placeholder="Caută nume sau statistici...">
+        </div>
+
+        <!-- 2. Filtre AND (Checkbox - Trebuie să îndeplinească TOATE condițiile selectate) -->
+        <div class="filtru-grup">
+            <label>Filtrează după Rol (AND):</label>
+            <label><input type="checkbox" class="filtru-and" value="Portar"> Portar</label>
+            <label><input type="checkbox" class="filtru-and" value="Atacant"> Atacant</label>
+            <label><input type="checkbox" class="filtru-and" value="Fundaș"> Fundaș</label>
+            <label><input type="checkbox" class="filtru-and" value="Mijlocaș"> Mijlocaș</label>
+            
+        </div>
+
+        <!-- 3. Filtre OR (Radio - Jucătorul aparține uneia dintre categorii) -->
+        <div class="filtru-grup">
+            <label>Categorie (OR):</label>
+            <label><input type="radio" name="filtru-or" class="filtru-or" value="toate" checked> Toți</label>
+            <label><input type="radio" name="filtru-or" class="filtru-or" value="Senior"> Seniori</label>
+            <label><input type="radio" name="filtru-or" class="filtru-or" value="Promovat"> Promovați</label>
+        </div>
+    </div>
+</section>
+     <section>
+    <h2>Căutare Abonat (Live Select)</h2>
+    <div class="jq-live-select-wrapper">
+        <div class="jq-select-header">
+            <span id="select-label">Alege un abonat...</span>
+            <i class="fas fa-caret-down"></i>
+        </div>
+        <div class="jq-select-dropdown">
+            <input type="text" id="input-search-select" placeholder="Scrie numele...">
+            <ul id="lista-abonati">
+                <li>Cheres I. Ana</li>
+                <li>Barburas Alex</li>
+                <li>Baciu Alex</li>
+                <li>Fat Alexandru</li>
+                <li>Hirt C. Alex</li>
+                <li>Petrescu V. Alex</li>
+                <li>Jucan Alex</li>
+                <li>Mielusel Alex</li>
+                <li>Racolta Alexandru</li>
+                <li>Vladea Alexandru</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
     <footer>
         <div class="footer-content">
@@ -251,7 +337,18 @@
             <p>Copyright &copy; 2026 David Dumitreasa. Toate drepturile rezervate.</p>
         </div>
     </footer>
+    <div id="modal-jucator" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <img id="img-modal-mare" src="" alt="Imagine Jucator">
+        <div id="info-modal-detalii">
+            </div>
+    </div>
+    </div>
 
+<!-- Import jQuery (Laborator 4) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Scriptul nostru de logică -->
     <script src="script.js"></script>
 </body>
 </html>

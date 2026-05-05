@@ -345,4 +345,237 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // ==========================================
+    // CERINȚĂ NOUĂ: MODAL IMAGINE TABEL
+    // ==========================================
+    const imaginiTabel = document.querySelectorAll(".img-tabel");
+    const modalJucator = document.getElementById("modal-jucator");
+
+    if (imaginiTabel.length > 0 && modalJucator) {
+        const imgMare = document.getElementById("img-modal-mare");
+        const infoDetalii = document.getElementById("info-modal-detalii");
+        const btnInchide = document.querySelector(".close-modal");
+
+        imaginiTabel.forEach(img => {
+            img.style.cursor = "zoom-in"; // Schimbăm cursorul pentru a indica interactivitatea
+
+            img.addEventListener("click", function() {
+                // 1. Preluăm sursa imaginii
+                imgMare.src = this.src;
+
+                // 2. Navigăm în DOM pentru a lua informațiile din același rând (tr)
+                const rand = this.closest("tr");
+                const infoNumePozitie = rand.cells[1].innerText; // A doua celulă
+                const infoStatistici = rand.cells[2].innerText;  // A treia celulă
+
+                // 3. Injectăm datele în modal
+                infoDetalii.innerHTML = `
+                    <h3>${infoNumePozitie}</h3>
+                    <p>${infoStatistici}</p>
+                `;
+
+                // 4. Afișăm modalul
+                modalJucator.style.display = "block";
+            });
+        });
+
+        // Închidere la click pe X
+        btnInchide.onclick = () => modalJucator.style.display = "none";
+
+        // Închidere la click oriunde în afara ferestrei albe
+        window.onclick = (event) => {
+            if (event.target == modalJucator) {
+                modalJucator.style.display = "none";
+            }
+        };
+    }
+
+    // --- EXERCIȚIUL 1: SLIDER VERTICAL CU CONTROL STOP ---
+    if ($('#slider-vertical').length > 0) {
+        let inaltimeElement = 250; 
+        let timerSliderJq = null; // Inițializăm cu null
+
+        function initializeazaSlider() {
+            let nrVizibile = parseInt($('#set-vizibile').val());
+            $('.jq-viewport').css('height', (nrVizibile * inaltimeElement) + 'px');
+            
+            // Pornim automat la aplicarea setărilor
+            pornesteTimerJq();
+        }
+
+        function slideSus() {
+            $('.jq-lista-elemente').animate({
+                marginTop: -inaltimeElement + 'px'
+            }, 600, function() {
+                $(this).find('li:last').after($(this).find('li:first'));
+                $(this).css({ marginTop: '0' });
+            });
+        }
+
+        function slideJos() {
+            $('.jq-lista-elemente').find('li:first').before($('.jq-lista-elemente').find('li:last'));
+            $('.jq-lista-elemente').css({ marginTop: -inaltimeElement + 'px' });
+            $('.jq-lista-elemente').animate({ marginTop: '0' }, 600);
+        }
+
+        function pornesteTimerJq() {
+            // Curățăm orice timer activ înainte de a porni unul nou (evităm accelerarea)
+            if (timerSliderJq !== null) {
+                clearInterval(timerSliderJq);
+            }
+            
+            let secunde = parseInt($('#set-secunde').val());
+            timerSliderJq = setInterval(slideSus, secunde * 1000);
+            
+            // Feedback vizual pe butoane
+            $('#btn-stop-slider').text("Stop").css("opacity", "1");
+            $('#btn-aplica-setari').text("Actualizează");
+        }
+
+        // LOGICA DE OPRIRE (STOP)
+        $('#btn-stop-slider').click(function() {
+            if (timerSliderJq !== null) {
+                clearInterval(timerSliderJq); // Oprește execuția repetitivă
+                timerSliderJq = null; // Resetăm variabila
+                
+                // Feedback vizual: schimbăm textul butonului
+                $(this).text("Slider Oprit").css("opacity", "0.5");
+                $('#btn-aplica-setari').text("Repornește");
+            }
+        });
+
+        $('#btn-aplica-setari').click(function() {
+            initializeazaSlider();
+        });
+
+        // Control manual prin săgeți (Oprește timer-ul automat pentru a nu se bate cap în cap cu click-ul)
+        $('.jq-sus').click(function() {
+            clearInterval(timerSliderJq);
+            slideJos();
+            pornesteTimerJq(); 
+        });
+
+        $('.jq-jos').click(function() {
+            clearInterval(timerSliderJq);
+            slideSus();
+            pornesteTimerJq();
+        });
+
+        initializeazaSlider();
+    }
+
+    $(document).ready(function() {
+    // Selector custom pentru căutare case-insensitive (ne-sensibilă la litere mari/mici)
+    $.expr[":"].containsNC = $.expr.createPseudo(function(arg) {
+        return function(elem) {
+            return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
+
+    function aplicaFiltrele() {
+        const textCautat = $('#cauta-jucator').val();
+        
+        // Luăm toate valorile de la checkbox-urile bifate (AND)
+        let conditiiAND = [];
+        $('.filtru-and:checked').each(function() {
+            conditiiAND.push($(this).val());
+        });
+
+        // Luăm valoarea de la radio button (OR)
+        const conditieOR = $('.filtru-or:checked').val();
+
+        // Parcurgem fiecare rând din tabel (tbody tr)
+        $('#tabel-jucatori tbody tr').each(function() {
+            const rand = $(this);
+            const textNume = rand.find('td:eq(1)').text(); // Coloana 2
+            const textDetalii = rand.find('td:eq(2)').text(); // Coloana 3
+            const textComplet = textNume + " " + textDetalii;
+
+            // 1. Verificare text (Căutare în 2 coloane)
+            const matchText = textComplet.toUpperCase().indexOf(textCautat.toUpperCase()) > -1;
+
+            // 2. Verificare AND (Trebuie să conțină toate cuvintele bifate)
+            let matchAND = true;
+            conditiiAND.forEach(cond => {
+                if (textComplet.indexOf(cond) === -1) matchAND = false;
+            });
+
+            // 3. Verificare OR (Dacă e "toate" e true, altfel verifică dacă conține tag-ul)
+            // Notă: "Senior" și "Promovat" sunt în tooltips (info-extra)
+            let matchOR = (conditieOR === "toate") || (textComplet.indexOf(conditieOR) > -1);
+
+            // Afișăm rândul doar dacă trece de TOATE cele 3 mari filtre
+            if (matchText && matchAND && matchOR) {
+                rand.show();
+            } else {
+                rand.hide();
+            }
+        });
+    }
+
+    // Declanșăm filtrarea la orice schimbare a input-urilor
+    $('#cauta-jucator').on('keyup', aplicaFiltrele);
+    $('.filtru-and, .filtru-or').on('change', aplicaFiltrele);
+});
+
+// --- EXERCIȚIUL 2: LIVE SEARCH IN SELECT ---
+    $('.jq-select-header').click(function() {
+        $('.jq-select-dropdown').slideToggle(200); // Deschidem/Închidem lista
+        $('#input-search-select').focus();
+    });
+
+    $('#input-search-select').on('keyup', function() {
+        const valoare = $(this).val().toLowerCase();
+        
+        // Filtrăm elementele <li> folosind selectorul :containsNC creat mai sus
+        $('#lista-abonati li').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(valoare) > -1);
+        });
+    });
+
+    // Selectarea unui element
+    $('#lista-abonati li').click(function() {
+        const textSelectat = $(this).text();
+        $('#select-label').text(textSelectat);
+        $('.jq-select-dropdown').hide();
+    });
+    // --- EXERCIȚIUL 3: FUNCȚIONALITATE CREATIVĂ (SCOUTING JUNIORI) ---
+    if ($('#scouting-juniori').length > 0) {
+        
+        $('.jq-nume-junior').click(function() {
+            let panouCurent = $(this).next('.jq-detalii-scout');
+            let iconita = $(this).find('i');
+
+            // 1. Logica de Acordeon: Dacă panoul apăsat e deja vizibil, doar îl închidem
+            if (panouCurent.is(':visible')) {
+                panouCurent.slideUp(300);
+                iconita.css('transform', 'rotate(0deg)');
+            } else {
+                // 2. Închidem TOATE celelalte panouri deschise
+                $('.jq-detalii-scout').slideUp(300);
+                $('.jq-nume-junior i').css('transform', 'rotate(0deg)'); // Resetăm săgețile
+                
+                // Resetăm barele de skill la 0 pentru a le putea anima din nou la următoarea deschidere
+                $('.skill-bar').css('width', '0');
+
+                // 3. Deschidem panoul pe care am dat click
+                panouCurent.slideDown(400, function() {
+                    // CALLBACK: Această funcție rulează abia DUPĂ ce slideDown() s-a terminat
+                    // 4. Găsim barele din acest panou și le animăm
+                    panouCurent.find('.skill-bar').each(function() {
+                        // Extragem valoarea din atributul HTML (ex: "85%")
+                        let valoareTinta = $(this).attr('data-valoare'); 
+                        
+                        // Animăm lățimea barei de la 0 la valoarea extrasa
+                        $(this).animate({
+                            width: valoareTinta
+                        }, 800); // Durează 800ms
+                    });
+                });
+                
+                // Rotim săgeata în sus
+                iconita.css('transform', 'rotate(180deg)'); 
+            }
+        });
+    }
 });

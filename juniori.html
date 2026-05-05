@@ -6,6 +6,8 @@
     <title>Academia de Juniori - FC Programare Web</title>
     <link rel="stylesheet" href="stil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -105,6 +107,51 @@
                 </details>
             </div>
         </aside>
+        <!-- LABORATORUL 4: EXERCIȚIUL 3 - Funcționalitate Creativă (Sistem Scouting) -->
+        <section id="scouting-juniori">
+            <h2>Sistem de Scouting (Evaluare Live)</h2>
+            <p>Apasă pe numele unui junior pentru a-i încărca fișa tehnică și atributele animate.</p>
+            
+            <div class="jq-lista-juniori">
+                <!-- Jucător 1 -->
+                <div class="jq-card-junior">
+                    <h3 class="jq-nume-junior">Popescu Andrei (U19) <i class="fas fa-chevron-down"></i></h3>
+                    <div class="jq-detalii-scout">
+                        <div class="skill-row">
+                            <span>Viteză</span>
+                            <div class="skill-bar-container"><div class="skill-bar" data-valoare="85%"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <span>Forță Șut</span>
+                            <div class="skill-bar-container"><div class="skill-bar" data-valoare="70%"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <span>Tehnică</span>
+                            <div class="skill-bar-container"><div class="skill-bar" data-valoare="90%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jucător 2 -->
+                <div class="jq-card-junior">
+                    <h3 class="jq-nume-junior">Ionescu Mihai (U17) <i class="fas fa-chevron-down"></i></h3>
+                    <div class="jq-detalii-scout">
+                        <div class="skill-row">
+                            <span>Viteză</span>
+                            <div class="skill-bar-container"><div class="skill-bar" data-valoare="95%"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <span>Forță Șut</span>
+                            <div class="skill-bar-container"><div class="skill-bar" data-valoare="60%"></div></div>
+                        </div>
+                        <div class="skill-row">
+                            <span>Tehnică</span>
+                            <div class="skill-bar-container"><div class="skill-bar" data-valoare="80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>

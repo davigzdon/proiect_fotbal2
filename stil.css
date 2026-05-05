@@ -617,3 +617,218 @@ footer {
     border-color: var(--culoare-accent) !important;
     transform: translateY(-5px);
 }
+
+/* ==========================================================
+   12. MODAL JUCATOR (Pop-up Imagine)
+   ========================================================== */
+.modal {
+    display: none; /* Ascuns implicit */
+    position: fixed;
+    z-index: 2000; /* Peste orice alt element */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* Fundal semi-transparent */
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+    animation: zoomIn 0.3s ease; /* Mic efect de deschidere */
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#img-modal-mare {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#info-modal-detalii h3 {
+    color: var(--culoare-primara);
+    margin-bottom: 10px;
+}
+
+/* ==========================================================
+   13. SLIDER VERTICAL JQUERY (Lab 4 - Ex 1)
+   ========================================================== */
+.jq-setari-slider {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.jq-slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #000;
+    border-radius: 10px;
+    /* Sagetile apar la hover pe acest container */
+}
+
+/* Fereastra vizibilă - înălțimea ei o vom calcula din jQuery */
+.jq-viewport {
+    width: 100%;
+    overflow: hidden; 
+    position: relative;
+}
+
+.jq-lista-elemente {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* Fiecare imagine/video va avea o înălțime fixă pentru calcule matematice exacte */
+.jq-lista-elemente li {
+    height: 250px; 
+    width: 100%;
+}
+
+.jq-lista-elemente li img,
+.jq-lista-elemente li video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Păstrează proporțiile fără să turtească imaginea */
+    display: block;
+}
+
+/* Săgețile de navigare - ascunse inițial (opacity 0) */
+.jq-sageata {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.8);
+    color: #333;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0; 
+    transition: opacity 0.3s;
+}
+
+.jq-sus { top: 10px; }
+.jq-jos { bottom: 10px; }
+
+/* Afișarea săgeților doar la hover pe container, conform cerinței */
+.jq-slider-container:hover .jq-sageata {
+    opacity: 1;
+}
+.panou-filtre {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.filtru-grup { display: flex; flex-direction: column; gap: 5px; }
+.filtru-grup label { font-weight: bold; margin-bottom: 5px; }
+
+.jq-live-select-wrapper { width: 300px; position: relative; cursor: pointer; }
+.jq-select-header { background: #eee; padding: 10px; border: 1px solid #ccc; display: flex; justify-content: space-between; }
+.jq-select-dropdown { 
+    display: none; /* Ascuns implicit */
+    position: absolute; width: 100%; border: 1px solid #ccc; background: #fff; z-index: 100;
+}
+.jq-select-dropdown input { width: 90%; margin: 5px 5%; padding: 5px; }
+#lista-abonati { list-style: none; padding: 0; margin: 0; max-height: 200px; overflow-y: auto; }
+#lista-abonati li { padding: 8px 15px; border-bottom: 1px solid #f0f0f0; }
+#lista-abonati li:hover { background: #3498db; color: white; }
+
+/* ==========================================================
+   14. SCOUTING JUNIORI (Lab 4 - Ex 3 Creativ)
+   ========================================================== */
+#scouting-juniori {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+.jq-card-junior {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.jq-nume-junior {
+    padding: 15px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    background: #2c3e50; /* Culoare de brand */
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.jq-nume-junior:hover { background: #34495e; }
+
+.jq-nume-junior i {
+    transition: transform 0.3s ease; /* Animație lină pentru rotirea săgeții */
+}
+
+/* Panoul ascuns inițial */
+.jq-detalii-scout {
+    display: none; 
+    padding: 20px;
+    background: #fdfdfd;
+}
+
+.skill-row { margin-bottom: 15px; }
+.skill-row span { font-weight: bold; display: inline-block; margin-bottom: 5px; color: #333;}
+
+/* Barele de progres (fundal gri, umplere verde) */
+.skill-bar-container {
+    width: 100%;
+    background: #e0e0e0;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-bar {
+    height: 100%;
+    background: var(--culoare-accent, #27ae60);
+    width: 0; /* Va fi animat de jQuery */
+}
