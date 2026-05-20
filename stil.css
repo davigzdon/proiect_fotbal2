@@ -832,3 +832,71 @@ footer {
     background: var(--culoare-accent, #27ae60);
     width: 0; /* Va fi animat de jQuery */
 }
+
+/* ==========================================================
+   14. SCOUTING JUNIORI (Lab 4) - Baza (Acordeon Vertical)
+   ========================================================== */
+#scouting-juniori { background: #fff; padding: 20px; border-radius: 8px; margin-top: 30px; }
+.jq-card-junior { border: 1px solid #ddd; margin-bottom: 10px; border-radius: 5px; overflow: hidden; }
+.jq-nume-junior { padding: 15px; margin: 0; display: flex; justify-content: space-between; background: #2c3e50; color: white; cursor: pointer; transition: all 0.3s; }
+.jq-nume-junior:hover { background: #34495e; }
+.jq-nume-junior i { transition: transform 0.3s ease; }
+.jq-detalii-scout { display: none; padding: 20px; background: #fdfdfd; }
+.skill-row { margin-bottom: 15px; }
+.skill-row span { font-weight: bold; display: inline-block; margin-bottom: 5px; color: #333;}
+.skill-bar-container { width: 100%; background: #e0e0e0; height: 20px; border-radius: 10px; overflow: hidden; }
+.skill-bar { height: 100%; background: #27ae60; width: 0; }
+
+/* ==========================================================
+   14.1 STRUCTURĂ DE TAB-URI (Switch Layout prin Flexbox)
+   ========================================================== */
+.jq-lista-juniori.mod-taburi {
+    display: flex;
+    flex-wrap: wrap; /* Permite elementelor să treacă pe rândul următor */
+}
+
+/* TRUC GENIAL: 'display: contents' anulează div-ul container (jq-card-junior) din layout, 
+   permițând header-elor (h3) și conținutului (div) să fie direct controlate de Flexbox-ul părintelui */
+.jq-lista-juniori.mod-taburi .jq-card-junior {
+    display: contents; 
+}
+
+/* Modificăm header-ele (numele jucătorilor) să arate ca niște butoane de Tab-uri */
+.jq-lista-juniori.mod-taburi .jq-nume-junior {
+    order: 1; /* Forțăm toate numele să stea sus (la ordinea 1) */
+    flex: 1; /* Le facem să ocupe spațiu egal (una lângă alta) */
+    background: #e0e0e0; /* Gri pentru tab-urile inactive */
+    color: #555;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    margin-right: 5px; /* Spațiu între tab-uri */
+    justify-content: center; /* Centrăm textul */
+}
+
+/* Ascundem săgețile în modul Tab-uri (nu au sens aici) */
+.jq-lista-juniori.mod-taburi .jq-nume-junior i { display: none; }
+
+/* Când un Tab este activ (clasa e pusă din jQuery) */
+.jq-lista-juniori.mod-taburi .jq-nume-junior.tab-activ {
+    background: #fff;
+    color: #2c3e50;
+    font-weight: bold;
+    border-top: 4px solid #27ae60; /* O dungă verde sus pentru a semnala selecția */
+    box-shadow: 0 4px 0 #fff; /* Ascunde linia de sub el */
+    z-index: 2;
+}
+
+/* Modificăm containerul de informații să stea sub Tab-uri */
+.jq-lista-juniori.mod-taburi .jq-detalii-scout {
+    order: 2; /* Forțăm informațiile să stea DEDESUBT (la ordinea 2) */
+    width: 100%; /* Să ocupe tot rândul */
+    border: 1px solid #ccc;
+    border-top: 1px solid #ccc; /* Linia care separă tab-urile de conținut */
+    background: #fff;
+    border-radius: 0 5px 5px 5px;
+    z-index: 1;
+    position: relative;
+    top: -1px;
+}

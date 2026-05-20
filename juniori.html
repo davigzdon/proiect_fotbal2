@@ -6,8 +6,7 @@
     <title>Academia de Juniori - FC Programare Web</title>
     <link rel="stylesheet" href="stil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="script.js" defer></script>
+    
 </head>
 <body>
     <header>
@@ -107,12 +106,24 @@
                 </details>
             </div>
         </aside>
-        <!-- LABORATORUL 4: EXERCIȚIUL 3 - Funcționalitate Creativă (Sistem Scouting) -->
+       <!-- LABORATORUL 4: EXERCIȚIUL 3 - Sistem Scouting (Acordeon <-> Taburi) -->
         <section id="scouting-juniori">
-            <h2>Sistem de Scouting (Evaluare Live)</h2>
-            <p>Apasă pe numele unui junior pentru a-i încărca fișa tehnică și atributele animate.</p>
             
+            <div class="scouting-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                <div>
+                    <h2 style="margin-top: 0;">Sistem de Scouting (Evaluare Live)</h2>
+                    <p style="margin-bottom: 0;">Apasă pe numele unui junior pentru a-i încărca fișa tehnică și atributele animate.</p>
+                </div>
+                
+                <!-- Butonul de Switch mutat în dreapta -->
+                <button id="btn-switch-format" style="padding: 10px 15px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; white-space: nowrap; margin-left: 20px;">
+                    <i class="fas fa-columns"></i> Schimbă în Mod Tab-uri
+                </button>
+            </div>
+            
+            <!-- Lista de jucători (Stare implicită: Acordeon) -->
             <div class="jq-lista-juniori">
+
                 <!-- Jucător 1 -->
                 <div class="jq-card-junior">
                     <h3 class="jq-nume-junior">Popescu Andrei (U19) <i class="fas fa-chevron-down"></i></h3>
@@ -150,6 +161,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     </main>
@@ -179,5 +191,7 @@
             <p>Proiect realizat de David Dumitreasa.</p>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

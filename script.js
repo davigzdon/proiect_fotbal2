@@ -117,16 +117,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ==========================================
-    // VALIDARE LA SUBMIT (Valabil pe orice formular de pe site)
+    // VALIDARE LA SUBMIT (Corectată pentru Backend)
     // ==========================================
     const formulare = document.querySelectorAll("form");
     
     formulare.forEach(function(formular) {
         formular.addEventListener("submit", function(eveniment) {
-            let toateBulinele = document.querySelectorAll(".bulina-validare");
+            
+            // MODIFICAREA CHEIE: Căutăm bulinele DOAR în formularul curent, nu pe toată pagina!
+            let toateBulinele = formular.querySelectorAll(".bulina-validare");
             let formularValid = true;
 
-            // Verificăm bulinele doar dacă formularul le conține
+            // Dacă formularul are buline (Înregistrare), le verificăm. Dacă nu are (Login), sare peste.
             if (toateBulinele.length > 0) {
                 toateBulinele.forEach(function(bulina) {
                     if (!bulina.classList.contains("valid")) {
@@ -137,9 +139,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (!formularValid) {
                     eveniment.preventDefault(); 
                     alert("⚠ Eroare! Te rugăm să completezi corect toate câmpurile înainte de a trimite.");
-                } else {
-                    alert("Datele sunt completate corect!");
-                }
+                } 
+                // Notă: Am șters alert-ul cu "Datele sunt completate corect" 
+                // pentru că acum lăsăm PHP-ul să ne arate mesajele de succes pe ecran, fără pop-up-uri.
             }
         });
     });
@@ -539,43 +541,138 @@ document.addEventListener("DOMContentLoaded", function() {
         $('#select-label').text(textSelectat);
         $('.jq-select-dropdown').hide();
     });
-    // --- EXERCIȚIUL 3: FUNCȚIONALITATE CREATIVĂ (SCOUTING JUNIORI) ---
+   // --- EXERCIȚIUL 3: FUNCȚIONALITATE CREATIVĂ (ACORDEON <-> TABURI) ---
+    // Verificăm dacă suntem pe pagina juniori.html
     if ($('#scouting-juniori').length > 0) {
         
-        $('.jq-nume-junior').click(function() {
+        // 1. Evenimentul de click pe numele jucătorului (PENTRU AMBELE MODURI)
+        $('.jq-nume-junior').off('click').on('click', function() {
             let panouCurent = $(this).next('.jq-detalii-scout');
             let iconita = $(this).find('i');
 
-            // 1. Logica de Acordeon: Dacă panoul apăsat e deja vizibil, doar îl închidem
             if (panouCurent.is(':visible')) {
+                // Dacă dai click pe cel deja deschis, îl închidem
                 panouCurent.slideUp(300);
                 iconita.css('transform', 'rotate(0deg)');
+                $(this).removeClass('tab-activ'); 
             } else {
-                // 2. Închidem TOATE celelalte panouri deschise
+                // Dacă e închis, mai întâi ascundem TOT ce e deschis pe pagină
                 $('.jq-detalii-scout').slideUp(300);
-                $('.jq-nume-junior i').css('transform', 'rotate(0deg)'); // Resetăm săgețile
-                
-                // Resetăm barele de skill la 0 pentru a le putea anima din nou la următoarea deschidere
-                $('.skill-bar').css('width', '0');
+                $('.jq-nume-junior i').css('transform', 'rotate(0deg)');
+                $('.skill-bar').css('width', '0'); // Resetăm barele la 0
+                $('.jq-nume-junior').removeClass('tab-activ'); // Resetăm tab-urile
 
-                // 3. Deschidem panoul pe care am dat click
+                // Acum îl deschidem strict pe cel pe care ai dat click
+                $(this).addClass('tab-activ'); 
+
                 panouCurent.slideDown(400, function() {
-                    // CALLBACK: Această funcție rulează abia DUPĂ ce slideDown() s-a terminat
-                    // 4. Găsim barele din acest panou și le animăm
+                    // Când termină de coborât, animăm barele verzi
                     panouCurent.find('.skill-bar').each(function() {
-                        // Extragem valoarea din atributul HTML (ex: "85%")
                         let valoareTinta = $(this).attr('data-valoare'); 
-                        
-                        // Animăm lățimea barei de la 0 la valoarea extrasa
-                        $(this).animate({
-                            width: valoareTinta
-                        }, 800); // Durează 800ms
+                        $(this).animate({ width: valoareTinta }, 800);
                     });
                 });
                 
-                // Rotim săgeata în sus
                 iconita.css('transform', 'rotate(180deg)'); 
             }
         });
+
+        // 2. Evenimentul de click pe butonul de Switch (Schimbare de aspect)
+        $('#btn-switch-format').off('click').on('click', function() {
+            let containerLista = $('.jq-lista-juniori');
+            let buton = $(this);
+
+            // Adăugăm/scoatem clasa care controlează CSS-ul
+            containerLista.toggleClass('mod-taburi');
+
+            // Verificăm în ce stare am ajuns pentru a actualiza butonul
+            if (containerLista.hasClass('mod-taburi')) {
+                // SUNTEM ÎN MOD TAB-URI
+                buton.html('<i class="fas fa-list"></i> Revino la Acordeon');
+                buton.css('background', '#e67e22'); 
+                
+            } else {
+                // SUNTEM ÎN MOD ACORDEON (Vertical)
+                buton.html('<i class="fas fa-columns"></i> Schimbă în Mod Tab-uri');
+                buton.css('background', '#3498db');
+            }
+        });
     }
+});
+
+// ==========================================
+// AJAX 1: Rezervare Bilete
+// ==========================================
+const formRezervare = document.getElementById('form-rezervare');
+
+if (formRezervare) {
+    formRezervare.addEventListener('submit', function(e) {
+        e.preventDefault(); // OPREȘTE REFRESH-UL PAGINII!
+        
+        const meciSelectat = document.getElementById('meci-rezervare').value;
+        const numarBilete = document.getElementById('nr-bilete').value;
+        const containerMesaj = document.getElementById('mesaj-rezervare');
+
+        containerMesaj.innerHTML = "Se procesează...";
+        containerMesaj.style.color = "blue";
+
+        fetch('rezervare_ajax.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ meci: meciSelectat, bilete: numarBilete })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'succes') {
+                containerMesaj.style.color = "green";
+                containerMesaj.innerHTML = data.mesaj;
+            } else {
+                containerMesaj.style.color = "red";
+                containerMesaj.innerHTML = data.mesaj;
+            }
+        })
+        .catch(error => {
+            console.error("Eroare AJAX Rezervare:", error);
+            containerMesaj.innerHTML = "A apărut o eroare de rețea.";
+        });
+    });
+}
+
+// ==========================================
+// AJAX 2: Adăugare/Eliminare Favorite (Toggle)
+// ==========================================
+const butoaneFavorite = document.querySelectorAll('.btn-favorit');
+
+butoaneFavorite.forEach(buton => {
+    buton.addEventListener('click', function() {
+        const idJucator = this.getAttribute('data-id');
+        const butonCurent = this;
+        const spanText = butonCurent.querySelector('.text-buton');
+
+        // Facem cererea AJAX
+        fetch('favorite_ajax.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id_jucator: idJucator })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'succes') {
+                if (data.actiune === 'adaugat') {
+                    butonCurent.style.background = "#e74c3c";
+                    spanText.innerHTML = "⭐ Elimină";
+                } else if (data.actiune === 'sters') {
+                    butonCurent.style.background = "#f39c12";
+                    spanText.innerHTML = "☆ Adaugă la Favorite";
+                }
+            } else if (data.status === 'neautentificat') {
+                // Dacă PHP-ul zice că nu e logat, îi dăm un alert și îl trimitem la login
+                alert(data.mesaj);
+                window.location.href = 'autentificare.php';
+            } else {
+                alert("Eroare: " + data.mesaj);
+            }
+        })
+        .catch(error => console.error("Eroare AJAX Favorite:", error));
+    });
 });
